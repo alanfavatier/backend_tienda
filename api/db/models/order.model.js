@@ -28,7 +28,7 @@ const OrderSchema = {
     field: 'created_at',
     defaultValue: DataTypes.NOW,
   },
-  total: {
+  /* total: {
     type: DataTypes.VIRTUAL,
     get() {
       if (this.items.length > 0) {
@@ -38,7 +38,7 @@ const OrderSchema = {
       }
       return 0;
     },
-  },
+  }, */
 };
 
 class Order extends Model {
