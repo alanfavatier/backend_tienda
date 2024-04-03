@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes, Sequelize } = require('sequelize');
 
 const CATEGORY_TABLE = 'categories';
 
@@ -7,7 +7,7 @@ const CategorySchema = {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
-    type: DataTypes.INTEGER,
+    type: DataTypes.INTEGER
   },
   name: {
     type: DataTypes.STRING,
@@ -22,21 +22,27 @@ const CategorySchema = {
     allowNull: false,
     type: DataTypes.DATE,
     field: 'created_at',
-    defaultValue: DataTypes.NOW,
+    defaultValue: Sequelize.NOW,
   },
-};
+}
+
 
 class Category extends Model {
+
   static associate(models) {
-    this.hasMany(models.Product, { as: 'pruducts', foreignKey: 'categoryId' });
+    this.hasMany(models.Product, {
+      as: 'products',
+      foreignKey: 'categoryId'
+    });
   }
+
   static config(sequelize) {
     return {
       sequelize,
       tableName: CATEGORY_TABLE,
       modelName: 'Category',
-      timestamps: false,
-    };
+      timestamps: false
+    }
   }
 }
 
